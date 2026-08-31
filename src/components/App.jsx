@@ -21,6 +21,9 @@ function App() {
   function removeToy (id) {
     setToys((toys) => toys.filter((toy)=> toy.id !==id))
   }
+  function addToy (newToy) {
+    setToys((toys) => [...toys, newToy])
+  }
 
   useEffect(() => {
     fetch(url)
@@ -32,11 +35,11 @@ function App() {
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm addToy={addToy} /> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} updateToy={updateToy} removeToy={removeToy}/>
+      <ToyContainer toys={toys} updateToy={updateToy} removeToy={removeToy} />
     </>
   );
 }
